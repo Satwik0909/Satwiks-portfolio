@@ -128,9 +128,10 @@ h3 {
   }
 }
 
-/* Pills & Badges */
+/* Pills & Badges - 8px spacing system */
 .badge {
-  padding: 8px 16px;
+  height: 36px;
+  padding: 0 16px;
   border-radius: 100px;
   background: var(--surface-alt);
   font-size: 14px;
@@ -139,6 +140,7 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .badge-outline {
@@ -154,7 +156,7 @@ h3 {
   border: 1px solid var(--glass-border);
 }
 
-/* Table Style */
+/* Experience Table - 3-column grid with clear hierarchy */
 .experience-table {
   width: 100%;
   border-top: 1px solid var(--border);
@@ -162,16 +164,41 @@ h3 {
 
 .experience-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 24px 0;
+  grid-template-columns: minmax(100px, 120px) 1fr minmax(100px, 120px);
+  padding: 20px 0;
   border-bottom: 1px solid var(--border);
-  align-items: center;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.experience-type {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--secondary);
+}
+
+.experience-company {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.experience-period {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--secondary);
+  text-align: right;
 }
 
 @media (max-width: 768px) {
   .experience-row {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 4px;
+    padding: 16px 0;
+  }
+
+  .experience-period {
+    text-align: left;
   }
 }
 
