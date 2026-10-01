@@ -12,9 +12,10 @@ interface NavbarProps {
 
 const navLinks = [
   { name: 'work', href: '#projects' },
-  { name: 'process', href: '#process' },
-  { name: 'services', href: '#services' },
-  { name: 'faq', href: '#faq' },
+  { name: 'loop', href: '#process' },
+  { name: 'experience', href: '#experience' },
+  { name: 'skills', href: '#skills' },
+  { name: 'github', href: '#github' },
 ];
 
 export default function Navbar({ onOpenResume }: NavbarProps) {
@@ -31,7 +32,7 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
       aria-label="Primary navigation"
     >
       <div className="container nav-shell">
-        <Link href="/" className="nav-brand" onClick={closeMenu} aria-label="Satwik Kukadolli home">
+        <Link href="#home" className="nav-brand" onClick={closeMenu} aria-label="Satwik Kukadolli home">
           <span className="brand-mark" aria-hidden="true">
             <span />
             <span />
@@ -39,31 +40,21 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
             <span />
           </span>
           <span>~/satwik</span>
-          <span className="nav-path">/portfolio</span>
+          <span className="nav-path">/fde</span>
         </Link>
 
         <div className="nav-links">
           {navLinks.map((link) => (
-            <Link key={link.name} href={link.href} className="nav-link">
-              {link.name}
-            </Link>
+            <Link key={link.name} href={link.href} className="nav-link">{link.name}</Link>
           ))}
         </div>
 
         <div className="nav-actions">
           <ModeToggle />
-          <button
-            type="button"
-            className="nav-resume"
-            onClick={onOpenResume}
-            aria-label="Open resume"
-            title="Open resume"
-          >
+          <button type="button" className="nav-resume" onClick={onOpenResume} aria-label="Open resume" title="Open resume">
             <FileText aria-hidden="true" />
           </button>
-          <Link href="#contact" className="nav-cta">
-            let&apos;s talk
-          </Link>
+          <Link href="#contact" className="nav-cta">let&apos;s talk</Link>
           <button
             type="button"
             className="mobile-menu-button"
@@ -88,25 +79,11 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
             transition={{ duration: 0.2 }}
           >
             {navLinks.map((link, index) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.045 }}
-              >
-                <Link href={link.href} className="mobile-menu-link" onClick={closeMenu}>
-                  {link.name}
-                </Link>
+              <motion.div key={link.name} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.045 }}>
+                <Link href={link.href} className="mobile-menu-link" onClick={closeMenu}>{link.name}</Link>
               </motion.div>
             ))}
-            <button
-              type="button"
-              className="button-primary"
-              onClick={() => {
-                onOpenResume();
-                closeMenu();
-              }}
-            >
+            <button type="button" className="button-primary" onClick={() => { onOpenResume(); closeMenu(); }}>
               open resume <span className="button-arrow">↗</span>
             </button>
           </motion.div>

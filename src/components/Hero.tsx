@@ -1,139 +1,106 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 
 interface HeroProps {
   onOpenResume: () => void;
 }
 
+const systemNodes = [
+  { label: 'users', className: 'system-node--users' },
+  { label: 'API', className: 'system-node--api' },
+  { label: 'data', className: 'system-node--data' },
+  { label: 'AI', className: 'system-node--ai' },
+];
+
 export default function Hero({ onOpenResume }: HeroProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section id="home" className="hero" aria-labelledby="hero-title">
       <div className="container hero-grid">
         <motion.div
           className="hero-copy"
-          initial={{ opacity: 0, y: 18 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="hero-kicker">
             <span>status: available</span>
             <span className="syntax-muted">·</span>
-            <span>backend / full-stack</span>
+            <span>forward-deployed engineer</span>
           </div>
 
           <h1 id="hero-title" className="hero-title">
-            Satwik <strong>builds</strong>
+            I find the gap,
             <br />
-            systems that <em>hold up</em>
+            then <strong>ship the fix</strong>
             <span className="cursor" aria-hidden="true" />
           </h1>
 
           <p className="hero-description">
-            Backend-focused software developer based in India. I design secure APIs,
-            multi-role SaaS products, and the interfaces that make complex workflows feel simple.
-            <br />
-            <code>python</code> + <code>django</code> + a bias for shipping.
+            I embed with the problem, design the system, and run the solution in production. Backend architecture,
+            AI-ready automation, and full-stack delivery for real businesses—not demo environments.
           </p>
 
           <div className="hero-actions">
-            <Link href="#contact" className="button-primary">
-              start a project <span className="button-arrow">↗</span>
-            </Link>
-            <button type="button" className="button-secondary" onClick={onOpenResume}>
-              open resume <span className="button-arrow">↓</span>
+            <button type="button" className="button-primary" onClick={onOpenResume}>
+              view resume <span className="button-arrow">↓</span>
             </button>
+            <Link href="#projects" className="button-secondary">
+              see selected work <span className="button-arrow">↘</span>
+            </Link>
+            <Link href="#contact" className="hero-contact-link">
+              contact <span className="button-arrow">↗</span>
+            </Link>
           </div>
 
           <div className="hero-meta" aria-label="Core technologies">
-            <span className="hero-meta-item">Python / Django</span>
+            <span className="hero-meta-item">Django / DRF</span>
             <span className="hero-meta-item">React / TypeScript</span>
-            <span className="hero-meta-item">PostgreSQL / APIs</span>
+            <span className="hero-meta-item">PostgreSQL / CI/CD</span>
           </div>
         </motion.div>
 
         <motion.div
           className="hero-visual"
-          initial={{ opacity: 0, y: 24, scale: 0.98 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 24, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.85, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="terminal-card" aria-label="Developer profile snapshot">
-            <div className="terminal-topbar">
-              <div className="terminal-dots" aria-hidden="true">
-                <i />
-                <i />
-                <i />
-              </div>
-              <span className="terminal-file">~/satwik/README.md</span>
-              <span className="terminal-status">● live</span>
+          <div className="system-scene" aria-hidden="true">
+            <div className="system-scene__grid" />
+            <div className="system-scene__ring system-scene__ring--outer" />
+            <div className="system-scene__ring system-scene__ring--inner" />
+            <svg className="system-scene__connections" viewBox="0 0 520 520" fill="none" preserveAspectRatio="none">
+              <path d="M90 154L260 260L418 132" />
+              <path d="M260 260L408 366" />
+              <path d="M260 260L112 382" />
+              <path d="M112 382L408 366" />
+            </svg>
+
+            <div className="system-core">
+              <span>FDE</span>
+              <small>ship the gap</small>
             </div>
 
-            <div className="terminal-body">
-              <div className="terminal-line">
-                <span className="line-number">01</span>
-                <span className="line-content syntax-comment">{'// who_is_satwik?'}</span>
+            {systemNodes.map((node) => (
+              <div key={node.label} className={`system-node ${node.className}`}>
+                <span className="system-node__dot" />
+                {node.label}
               </div>
-              <div className="terminal-line">
-                <span className="line-number">02</span>
-                <span className="line-content syntax-value">const developer = {'{'}</span>
-              </div>
-              <div className="terminal-line">
-                <span className="line-number">03</span>
-                <span className="line-content">
-                  <span className="syntax-key">name</span>: <span className="syntax-string">&quot;Satwik Kukadolli&quot;</span>,
-                </span>
-              </div>
-              <div className="terminal-line">
-                <span className="line-number">04</span>
-                <span className="line-content">
-                  <span className="syntax-key">focus</span>: <span className="syntax-string">&quot;backend + systems&quot;</span>,
-                </span>
-              </div>
-              <div className="terminal-line">
-                <span className="line-number">05</span>
-                <span className="line-content">
-                  <span className="syntax-key">location</span>: <span className="syntax-string">&quot;Dharwad, IN&quot;</span>,
-                </span>
-              </div>
-              <div className="terminal-line">
-                <span className="line-number">06</span>
-                <span className="line-content">
-                  <span className="syntax-key">stack</span>: [<span className="syntax-string">&quot;Python&quot;</span>, <span className="syntax-string">&quot;Django&quot;</span>, <span className="syntax-string">&quot;React&quot;</span>],
-                </span>
-              </div>
-              <div className="terminal-line">
-                <span className="line-number">07</span>
-                <span className="line-content">
-                  <span className="syntax-key">available</span>: <span className="syntax-string">true</span>,
-                </span>
-              </div>
-              <div className="terminal-line">
-                <span className="line-number">08</span>
-                <span className="line-content syntax-value">{'}'};</span>
-              </div>
+            ))}
 
-              <div className="terminal-divider" />
-
-              <div className="terminal-line">
-                <span className="line-number">09</span>
-                <span className="line-content syntax-comment">{'// current_signal'}</span>
-              </div>
-              <div className="terminal-line">
-                <span className="line-number">10</span>
-                <span className="line-content syntax-muted">$ ship --something-useful</span>
-              </div>
-              <div className="terminal-signal">
-                <span><span className="signal-dot" />open to good problems</span>
-                <span>200 OK</span>
-              </div>
+            <div className="system-scene__legend">
+              <span><i className="legend-dot legend-dot--accent" /> problem → system</span>
+              <span><i className="legend-dot" /> production feedback</span>
             </div>
           </div>
 
           <div className="hero-note">
-            <strong>ship note_</strong>
-            Reliable systems are built one clear decision at a time.
+            <strong>field note_</strong>
+            Understand the gap. Own the outcome. Stay on call.
           </div>
         </motion.div>
       </div>

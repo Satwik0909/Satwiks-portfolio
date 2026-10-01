@@ -14,25 +14,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Satwik Kukadolli — Backend-focused Software Developer',
+  title: 'Satwik Kukadolli — Forward Deployed Engineer',
   description:
-    'Portfolio of Satwik Kukadolli, a backend-focused software developer building secure, scalable web systems with Python, Django, and React.',
+    'Satwik Kukadolli is a forward-deployed engineer building backend systems, AI-ready automations, and full-stack SaaS products for real businesses.',
+  keywords: ['Forward Deployed Engineer', 'Django', 'Python', 'AI automation', 'SaaS', 'REST APIs', 'PostgreSQL', 'India'],
+  authors: [{ name: 'Satwik Kukadolli' }],
+  openGraph: {
+    title: 'Satwik Kukadolli — Forward Deployed Engineer',
+    description: 'I find the gap between what a business needs and what its software does, then I ship the fix.',
+    type: 'website',
+    siteName: 'Satwik Kukadolli / FDE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Satwik Kukadolli — Forward Deployed Engineer',
+    description: 'Backend systems, AI-ready automations, and full-stack delivery for real businesses.',
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>

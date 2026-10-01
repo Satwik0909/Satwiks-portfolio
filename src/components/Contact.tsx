@@ -28,13 +28,13 @@ export default function Contact() {
           </a>
           <div className="contact-links">
             <a href="https://github.com/Satwik0909" target="_blank" rel="noreferrer">github</a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">linkedin</a>
+            <a href="https://www.linkedin.com/in/satwikkukadolli" target="_blank" rel="noreferrer">linkedin</a>
             <Link href="#home">back_to_top</Link>
           </div>
         </motion.div>
 
         <footer className="site-footer">
-          <span className="footer-meta"><strong>© {new Date().getFullYear()} Satwik Kukadolli</strong> / all systems nominal</span>
+          <span className="footer-meta"><strong>© {new Date().getFullYear()} Satwik Kukadolli</strong> / systems that hold up</span>
           <span className="footer-meta">Dharwad, India · UTC +05:30</span>
         </footer>
       </div>
