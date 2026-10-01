@@ -3,93 +3,61 @@
 import { motion } from 'framer-motion';
 
 const steps = [
-    {
-        number: "01",
-        title: "Discovery & Strategy",
-        desc: "We dive deep into your project goals and user needs to build a solid architectural foundation."
-    },
-    {
-        number: "02",
-        title: "Engineering & Dev",
-        desc: "Secure, scalable backend logic meets sleek, responsive frontend implementation using modern stacks."
-    },
-    {
-        number: "03",
-        title: "Testing & Launch",
-        desc: "Rigorous debugging and performance optimization before deploying to production environments."
-    }
+  {
+    number: '01',
+    title: 'Map the real problem',
+    desc: 'Clarify the users, the constraints, and the data moving through the product before a line of code gets precious.',
+  },
+  {
+    number: '02',
+    title: 'Design for the next version',
+    desc: 'Choose boundaries, permissions, and APIs that keep the first release focused without making the second release painful.',
+  },
+  {
+    number: '03',
+    title: 'Ship, observe, improve',
+    desc: 'Test the edges, deploy with confidence, and use real feedback to make the system faster and easier to operate.',
+  },
 ];
 
 export default function Process() {
-    return (
-        <section id="process" className="section-padding" style={{ background: 'var(--background)' }}>
-            <div className="container">
-                <div className="process-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center' }}>
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="process-content"
-                    >
-                        <div className="mb-6">
-                            <span className="badge badge-outline">Our Process</span>
-                        </div>
-                        <h2 className="mb-8 md:mb-12">Crafting bold visuals that <span className="opacity-40">elevate brands</span></h2>
+  return (
+    <section id="process" className="section-padding process-section" aria-labelledby="process-title">
+      <div className="container process-layout">
+        <motion.div
+          className="process-copy"
+          initial={{ opacity: 0, x: -16 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.65 }}
+        >
+          <span className="eyebrow">how_it_works</span>
+          <h2 id="process-title">Less theatre. <em>More signal.</em></h2>
+          <p>
+            A small, transparent process keeps the work moving. No mystery handoffs—just clear decisions, useful checkpoints, and software that earns its place in production.
+          </p>
+        </motion.div>
 
-                        <div className="steps-container" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-                            {steps.map((step, i) => (
-                                <div key={i} className="flex gap-4 md:gap-6">
-                                    <span className="text-sm font-bold opacity-30 mt-1">{step.number}</span>
-                                    <div>
-                                        <h3 className="text-lg md:text-xl font-semibold mb-2">{step.title}</h3>
-                                        <p className="text-sm md:text-base" style={{ color: 'var(--secondary)', lineHeight: '1.7' }}>{step.desc}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1 }}
-                        className="process-image-container hidden md:block"
-                        style={{
-                            position: 'relative',
-                            borderRadius: '24px',
-                            overflow: 'hidden',
-                            aspectRatio: '0.9',
-                            background: '#0a0a0a'
-                        }}
-                    >
-                        <img
-                            src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop"
-                            alt="Process"
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }}
-                        />
-                    </motion.div>
-                </div>
-            </div>
-            <style jsx>{`
-                @media (max-width: 768px) {
-                    .process-grid {
-                        grid-template-columns: 1fr !important;
-                        text-align: center;
-                    }
-                    .steps-container {
-                        text-align: left;
-                        max-width: 500px;
-                        margin: 0 auto;
-                    }
-                    .badge {
-                        margin: 0 auto;
-                    }
-                    h2 {
-                        text-align: center;
-                    }
-                }
-            `}</style>
-        </section>
-    );
+        <div className="process-list">
+          {steps.map((step, index) => (
+            <motion.article
+              className="process-item"
+              key={step.number}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.45 }}
+              transition={{ delay: index * 0.08, duration: 0.5 }}
+            >
+              <span className="process-number">{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </div>
+              <span className="process-arrow" aria-hidden="true">↗</span>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

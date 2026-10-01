@@ -1,74 +1,85 @@
 'use client';
 
+import { Database, Gauge, Layers3, ShieldCheck } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Layout, Palette, Code, Smartphone, Database } from 'lucide-react';
 
-const services = [
-    { icon: <Layout strokeWidth={1.5} />, title: "Brand Identity", desc: "Crafting unique, memorable brand identities that resonate with your audience." },
-    { icon: <Palette strokeWidth={1.5} />, title: "Brand Design", desc: "Designing sleek, impactful packaging that not only looks stunning but connects." },
-    { icon: <Database strokeWidth={1.5} />, title: "Backend Systems", desc: "Building robust server-side logic and highly secure database architectures." },
-    { icon: <Smartphone strokeWidth={1.5} />, title: "Full-Stack SaaS", desc: "Tailored mobile and web experiences that align perfectly with your brand's aesthetic." }
+interface Service {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const services: Service[] = [
+  {
+    icon: Database,
+    title: 'Backend architecture',
+    description: 'Django services, REST APIs, data models, and integrations designed around the way the product actually works.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Secure workflows',
+    description: 'Authentication, RBAC, validation, and payment flows that protect both the people using the system and the data inside it.',
+  },
+  {
+    icon: Layers3,
+    title: 'Full-stack delivery',
+    description: 'Responsive React interfaces connected to dependable APIs, with the edge cases considered before launch day.',
+  },
+  {
+    icon: Gauge,
+    title: 'Production hardening',
+    description: 'Testing, performance work, deployment, and the operational details that turn a promising build into a useful one.',
+  },
 ];
 
-const tags = [
-    "Django", "React.js", "Node.js", "PostgreSQL", "Full-Stack", "Backend",
-    "SaaS", "RBAC", "Cloud Deployment", "API Integration", "CI/CD", "Postman"
-];
+const stack = ['Python', 'Django', 'DRF', 'React', 'TypeScript', 'PostgreSQL', 'MongoDB', 'JWT', 'REST APIs', 'CI/CD', 'VPS'];
 
 export default function Services() {
-    return (
-        <section id="services" className="section-padding overflow-hidden">
-            <div className="container">
-                <h2 className="mb-12 md:mb-20 text-center">Our <span className="opacity-40">Expertise</span></h2>
+  return (
+    <section id="services" className="section-padding services-section" aria-labelledby="services-title">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <span className="eyebrow">capabilities</span>
+            <h2 id="services-title" className="section-heading">
+              Useful software,
+              <br />
+              <em>without the noise.</em>
+            </h2>
+          </div>
+          <p className="section-intro">
+            The best technical work is felt in the product: faster decisions, fewer surprises, and a system that can keep growing after handoff.
+          </p>
+        </div>
 
-                <div className="services-grid">
-                    {services.map((service, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="p-8 md:p-10 glass hover:bg-surface transition-colors"
-                            style={{ borderRadius: '24px' }}
-                        >
-                            <div className="mb-6 flex justify-center md:justify-start" style={{ color: 'var(--accent)' }}>{service.icon}</div>
-                            <h3 className="mb-4 text-xl font-semibold text-center md:text-left">{service.title}</h3>
-                            <p className="text-sm leading-relaxed text-center md:text-left" style={{ color: 'var(--secondary)' }}>
-                                {service.desc}
-                            </p>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
+        <div className="service-grid">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <motion.article
+                className="service-card"
+                key={service.title}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ delay: index * 0.07, duration: 0.5 }}
+              >
+                <span className="service-icon" aria-hidden="true"><Icon /></span>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </motion.article>
+            );
+          })}
+        </div>
 
-            {/* Marquee Ticker */}
-            <div className="mt-20 md:mt-32 marquee-container border-y py-6 md:py-10" style={{ borderColor: 'var(--border)' }}>
-                <div className="marquee-inner">
-                    {[...tags, ...tags].map((tag, i) => (
-                        <div key={i} className="inline-flex items-center mx-6 md:mx-8">
-                            <span className="w-1.5 h-1.5 rounded-full mr-3 md:mr-4" style={{ backgroundColor: 'var(--border)' }}></span>
-                            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity cursor-default">
-                                {tag}
-                            </span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <style jsx>{`
-                .services-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 1.5rem;
-                }
-                @media (max-width: 768px) {
-                    .services-grid {
-                        grid-template-columns: 1fr;
-                        gap: 2rem;
-                    }
-                }
-            `}</style>
-        </section>
-    );
+        <div className="stack-strip" aria-label="Technology stack">
+          <span className="stack-strip-label">stack.log</span>
+          <div className="stack-strip-items">
+            {[...stack, ...stack].map((item, index) => <span key={`${item}-${index}`}>{item}</span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -24,7 +24,7 @@ export default function Testimonials() {
                             className="glass p-10 mb-8"
                             style={{ borderRadius: '2rem', padding: '3rem' }}
                         >
-                            <p className="text-xl italic mb-6">"{t.text}"</p>
+                            <p className="text-xl italic mb-6">&quot;{t.text}&quot;</p>
                             <p className="font-bold text-[var(--accent)]">{t.author}</p>
                         </motion.div>
                     ))}

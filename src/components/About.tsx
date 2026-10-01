@@ -64,7 +64,7 @@ export default function About() {
                     >
                         <h2 className="mb-8">Technical <span style={{ color: 'var(--accent)' }}>Stack</span></h2>
 
-                        {Object.entries(skills).map(([category, list], idx) => (
+                        {Object.entries(skills).map(([category, list]) => (
                             <div key={category} className="mb-8">
                                 <h3 className="text-sm font-bold uppercase tracking-[0.2em] mb-4 text-[var(--secondary)]">
                                     {category}
