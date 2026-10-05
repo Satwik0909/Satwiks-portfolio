@@ -17,9 +17,22 @@ type ExperienceEntry = {
 
 const experiences: ExperienceEntry[] = [
   {
+    company: 'Subhx Infotech',
+    role: 'Full Stack Engineer',
+    period: '',
+    location: 'Jharkhand, India · Currently working',
+    summary: 'Currently working as a Full Stack Engineer, contributing to full-cycle product development across frontend and backend systems.',
+    bullets: [
+      'Building and maintaining full-stack web applications with modern technologies.',
+      'Collaborating with cross-functional teams to deliver scalable and reliable software solutions.',
+    ],
+    stack: ['Full Stack', 'React', 'Node.js', 'REST API'],
+    badges: ['Currently working'],
+  },
+  {
     company: 'Sajre Edutech Private Limited',
     role: 'Software Developer',
-    period: 'Jan 2026 – Apr 2026',
+    period: '',
     location: 'Dharwad, Karnataka · On-site',
     summary: 'Owned backend architecture, API design, and production reliability for a nationally accessible SaaS platform from design through deployment.',
     bullets: [
@@ -33,25 +46,9 @@ const experiences: ExperienceEntry[] = [
     badges: ['Customer-facing', 'Owned in production'],
   },
   {
-    company: 'Sajre Edutech Private Limited',
-    role: 'Back End Developer',
-    period: 'Dates to confirm',
-    location: 'Dharwad, Karnataka · On-site',
-    summary: 'Built the backend of a national-level art competition platform used by students, judges, institutions, and administrators.',
-    bullets: [
-      'Architected a multi-role portal with secure JWT authentication, role-based access, and dynamic dashboards.',
-      'Implemented enrollment workflows, fee management, and a star-based progression system that tracks artist growth.',
-      'Built artwork submission, AI-assisted validation, voting, certificate generation, and real-time event modules.',
-      'Integrated WhatsApp notifications, a referral engine, and automated communication pipelines.',
-      'Kept the platform stable with API testing, PostgreSQL query optimization, CI/CD automation, and server monitoring.',
-    ],
-    stack: ['Python', 'Django', 'DRF', 'PostgreSQL', 'JWT', 'CI/CD', 'VPS', 'Shell scripting'],
-    badges: ['Customer-facing', 'Owned in production'],
-  },
-  {
     company: 'Ironhawks Technologies',
     role: 'Full-stack Developer',
-    period: 'Dates to confirm',
+    period: '',
     location: 'Full-time',
     summary: "Built and deployed the company's official website from scratch while helping the development team move toward clearer, faster delivery.",
     bullets: [
@@ -65,7 +62,7 @@ const experiences: ExperienceEntry[] = [
   {
     company: 'LetzStepIn Private Limited',
     role: 'Full-stack Developer · Internship',
-    period: 'Nov 2024 – Mar 2025',
+    period: '',
     location: 'Internship',
     summary: 'Built UI for a VR-enabled travel and real-estate platform in a collaborative Git and PR workflow.',
     bullets: [
@@ -158,7 +155,6 @@ export default function Experience() {
           })}
         </div>
 
-        <p className="experience-note"><span aria-hidden="true">↳</span> One Sajre role&apos;s exact LinkedIn dates are intentionally left for confirmation rather than inferred.</p>
       </div>
     </section>
   );

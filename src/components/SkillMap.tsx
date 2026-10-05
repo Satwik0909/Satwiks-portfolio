@@ -1,10 +1,10 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { Check, CircleDashed, GraduationCap } from 'lucide-react';
+import { Check, CircleDashed } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
-type SkillStatus = 'Shipped' | 'Practicing' | 'Learning';
+type SkillStatus = 'Shipped' | 'Working';
 type Skill = { name: string; status: SkillStatus; proof: string };
 type SkillCluster = { name: string; description: string; skills: Skill[] };
 
@@ -18,7 +18,7 @@ const clusters: SkillCluster[] = [
       { name: 'SQL + PostgreSQL', status: 'Shipped', proof: 'Data modeling, query optimization, and tenant-aware workflows.' },
       { name: 'REST API design', status: 'Shipped', proof: 'Versioned workflows, validation, pagination, and integrations.' },
       { name: 'Auth + RBAC', status: 'Shipped', proof: 'JWT, role boundaries, and least-privilege access.' },
-      { name: 'Data integration', status: 'Practicing', proof: 'Webhooks, third-party APIs, and messy customer data.' },
+      { name: 'Data integration', status: 'Working', proof: 'Webhooks, third-party APIs, and messy customer data.' },
     ],
   },
   {
@@ -30,7 +30,7 @@ const clusters: SkillCluster[] = [
       { name: 'API testing', status: 'Shipped', proof: 'Structured tests, Postman workflows, and permission-boundary checks.' },
       { name: 'GitHub Actions + CI/CD', status: 'Shipped', proof: 'Automated checks and VPS deployment workflows.' },
       { name: 'Nginx + VPS', status: 'Shipped', proof: 'Reverse proxy, deployment, and production operations.' },
-      { name: 'Queues + observability', status: 'Learning', proof: 'Next system-design layer: retries, traces, and operational feedback.' },
+      { name: 'Queues + observability', status: 'Working', proof: 'Next system-design layer: retries, traces, and operational feedback.' },
     ],
   },
   {
@@ -39,30 +39,29 @@ const clusters: SkillCluster[] = [
     skills: [
       { name: 'React + Next.js', status: 'Shipped', proof: 'Responsive interfaces and this App Router portfolio.' },
       { name: 'Tailwind + CSS', status: 'Shipped', proof: 'Responsive UI systems and interaction states.' },
-      { name: 'Accessibility', status: 'Practicing', proof: 'Keyboard states, semantic content, focus management, and reduced motion.' },
+      { name: 'Accessibility', status: 'Working', proof: 'Keyboard states, semantic content, focus management, and reduced motion.' },
       { name: 'Motion design', status: 'Shipped', proof: 'Framer Motion transitions that support hierarchy, not noise.' },
-      { name: 'System design', status: 'Practicing', proof: 'Writing down trade-offs for multi-role SaaS and integrations.' },
+      { name: 'System design', status: 'Working', proof: 'Writing down trade-offs for multi-role SaaS and integrations.' },
     ],
   },
   {
     name: 'Applied AI',
     description: 'The FDE roadmap: ship useful automation, then make it measurable and safe.',
     skills: [
-      { name: 'LLM APIs + structured output', status: 'Learning', proof: 'Building toward reliable tool use and typed responses.' },
-      { name: 'RAG + citations', status: 'Learning', proof: 'Learning retrieval, grounding, and permission-aware context.' },
-      { name: 'Agents + MCP', status: 'Learning', proof: 'Exploring integrations that can act on customer systems safely.' },
-      { name: 'Evals + guardrails', status: 'Learning', proof: 'Golden datasets, refusal behavior, and regression checks.' },
-      { name: 'Workflow automation', status: 'Practicing', proof: 'WhatsApp notifications, referrals, and repeatable communication flows.' },
+      { name: 'LLM APIs + structured output', status: 'Working', proof: 'Building toward reliable tool use and typed responses.' },
+      { name: 'RAG + citations', status: 'Working', proof: 'Learning retrieval, grounding, and permission-aware context.' },
+      { name: 'Agents + MCP', status: 'Working', proof: 'Exploring integrations that can act on customer systems safely.' },
+      { name: 'Evals + guardrails', status: 'Working', proof: 'Golden datasets, refusal behavior, and regression checks.' },
+      { name: 'Workflow automation', status: 'Working', proof: 'WhatsApp notifications, referrals, and repeatable communication flows.' },
     ],
   },
 ];
 
-const statusOrder: SkillStatus[] = ['Shipped', 'Practicing', 'Learning'];
+const statusOrder: SkillStatus[] = ['Shipped', 'Working'];
 
 function StatusIcon({ status }: { status: SkillStatus }) {
   if (status === 'Shipped') return <Check size={13} aria-hidden="true" />;
-  if (status === 'Practicing') return <CircleDashed size={13} aria-hidden="true" />;
-  return <GraduationCap size={13} aria-hidden="true" />;
+  return <CircleDashed size={13} aria-hidden="true" />;
 }
 
 export default function SkillMap() {
@@ -81,13 +80,13 @@ export default function SkillMap() {
           <div>
             <span className="eyebrow">honest_skill_map</span>
             <h2 id="skills-title" className="section-heading">
-              Shipped, practicing,
+              Shipped, working,
               <br />
-              <em>still learning.</em>
+              <em>still working.</em>
             </h2>
           </div>
           <p className="section-intro">
-            A roadmap and a showcase. The label is part of the proof: shipped means I can point to real work; learning means I am not pretending the gap is closed.
+            A roadmap and a showcase. The label is part of the proof: shipped means I can point to real work; working means I am actively building in this area.
           </p>
         </header>
 
