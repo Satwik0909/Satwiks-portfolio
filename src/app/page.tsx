@@ -12,29 +12,11 @@ import Projects from '@/components/Projects';
 import ResumeModal from '@/components/ResumeModal';
 import SkillMap from '@/components/SkillMap';
 
-const portfolioStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Satwik Kukadolli',
-  jobTitle: 'Forward Deployed Engineer',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Dharwad',
-    addressCountry: 'IN',
-  },
-  sameAs: [
-    'https://www.linkedin.com/in/satwikkukadolli',
-    'https://github.com/Satwik0909',
-  ],
-  knowsAbout: ['Django', 'Python', 'REST APIs', 'PostgreSQL', 'React', 'AI automation', 'SaaS'],
-};
-
 export default function Home() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioStructuredData) }} />
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
       <main>
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
