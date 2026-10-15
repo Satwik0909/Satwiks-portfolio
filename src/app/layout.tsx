@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import './portfolio.css';
 import 'lenis/dist/lenis.css';
-import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@vercel/analytics/react';
 
 const geistSans = Geist({
@@ -91,7 +90,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <head>
         <script
           type="application/ld+json"
@@ -99,10 +98,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
-          <Analytics />
-        </ThemeProvider>
+        {children}
+        <Analytics />
       </body>
     </html>
   );

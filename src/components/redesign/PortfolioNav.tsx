@@ -5,7 +5,6 @@ import { ArrowUpRight, FileText, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { navigation } from '@/data/portfolio';
-import ModeToggle from '@/components/ModeToggle';
 
 interface PortfolioNavProps {
   onOpenResume: () => void;
@@ -36,7 +35,6 @@ export default function PortfolioNav({ onOpenResume }: PortfolioNavProps) {
         </div>
 
         <div className="v2-nav__actions">
-          <ModeToggle />
           <button className="v2-icon-button" type="button" onClick={onOpenResume} aria-label="Open résumé">
             <FileText aria-hidden="true" />
           </button>
@@ -77,4 +75,3 @@ export default function PortfolioNav({ onOpenResume }: PortfolioNavProps) {
     </motion.header>
   );
 }
-

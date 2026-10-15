@@ -4,10 +4,19 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useSyncExternalStore } from 'react';
 import MagneticButton from '@/components/ui/smoothui/magnetic-button';
 import VantaBackground from '@/components/VantaBackground';
 
 const SystemOrb = dynamic(() => import('./SystemOrb'), { ssr: false });
+const desktopVisualQuery = '(min-width: 721px)';
+const subscribeToDesktopVisuals = (onStoreChange: () => void) => {
+  const mediaQuery = window.matchMedia(desktopVisualQuery);
+  mediaQuery.addEventListener('change', onStoreChange);
+  return () => mediaQuery.removeEventListener('change', onStoreChange);
+};
+const getDesktopVisualSnapshot = () => window.matchMedia(desktopVisualQuery).matches;
+const getDesktopVisualServerSnapshot = () => false;
 
 interface PortfolioHeroProps {
   onOpenResume: () => void;
@@ -17,6 +26,11 @@ const heroLines = ['I engineer the space', 'between customer need', 'and company
 
 export default function PortfolioHero({ onOpenResume }: PortfolioHeroProps) {
   const prefersReducedMotion = useReducedMotion();
+  const showDesktopVisuals = useSyncExternalStore(
+    subscribeToDesktopVisuals,
+    getDesktopVisualSnapshot,
+    getDesktopVisualServerSnapshot,
+  );
 
   return (
     <section id="home" className="v2-hero" aria-labelledby="v2-hero-title">
@@ -80,7 +94,7 @@ export default function PortfolioHero({ onOpenResume }: PortfolioHeroProps) {
             <span>FIELD_TO_GROWTH.OS</span>
             <span><i /> live model</span>
           </div>
-          <SystemOrb />
+          {showDesktopVisuals && !prefersReducedMotion ? <SystemOrb /> : null}
           <div className="v2-system__core" aria-hidden="true">
             <strong>FDE</strong><span>×</span><strong>GTM</strong>
           </div>

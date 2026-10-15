@@ -75,6 +75,7 @@ const MagneticButton = ({
   });
 
   const isEffectDisabled = disabled || shouldReduceMotion || !isHoverDevice;
+  const interactionRadius = isEffectDisabled ? 0 : radius;
 
   const handleMouseMove = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
@@ -120,8 +121,8 @@ const MagneticButton = ({
       ref={wrapperRef}
       role="presentation"
       style={{
-        margin: `-${radius / 2}px`,
-        padding: `${radius / 2}px`,
+        margin: `-${interactionRadius / 2}px`,
+        padding: `${interactionRadius / 2}px`,
       }}
     >
       <motion.div style={{ x, y }}>

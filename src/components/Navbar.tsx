@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FileText, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import ModeToggle from './ModeToggle';
 
 interface NavbarProps {
   onOpenResume: () => void;
@@ -50,7 +49,6 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
         </div>
 
         <div className="nav-actions">
-          <ModeToggle />
           <button type="button" className="nav-resume" onClick={onOpenResume} aria-label="Open resume" title="Open resume">
             <FileText aria-hidden="true" />
           </button>

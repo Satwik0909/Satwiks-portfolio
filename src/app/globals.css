@@ -3,25 +3,6 @@
 @tailwind utilities;
 
 :root {
-  --background: #f5f4ef;
-  --foreground: #171613;
-  --surface: #ebe9e1;
-  --surface-raised: #fbfaf7;
-  --surface-strong: #dfddd4;
-  --text-muted: #6f6c63;
-  --text-faint: #98948a;
-  --line: rgba(23, 22, 19, 0.14);
-  --line-strong: rgba(23, 22, 19, 0.27);
-  --accent: #4c8d55;
-  --accent-strong: #246b36;
-  --accent-soft: #dfeade;
-  --warning: #bd7e31;
-  --danger: #c65f4e;
-  --code-bg: #e7e4da;
-  --shadow: 0 18px 60px rgba(49, 45, 31, 0.1);
-}
-
-.dark {
   --background: #0d0c0a;
   --foreground: #e6e2d7;
   --surface: #141310;
@@ -48,11 +29,8 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
-}
-
-html.dark {
   color-scheme: dark;
+  background: var(--background);
 }
 
 body {
@@ -64,7 +42,6 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 220ms ease, color 220ms ease;
 }
 
 body::selection {
@@ -82,6 +59,7 @@ a,
 input,
 textarea {
   font: inherit;
+  touch-action: manipulation;
 }
 
 button {

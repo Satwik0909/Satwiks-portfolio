@@ -6,7 +6,7 @@ import type { LenisRef } from 'lenis/react';
 import { ReactLenis } from 'lenis/react';
 import { type ReactNode, useEffect, useRef } from 'react';
 import CursorFollow from '@/components/ui/smoothui/cursor-follow';
-import PagePreloader from '@/components/ui/smoothui/page-preloader';
+import PortfolioLoader from '@/components/redesign/PortfolioLoader';
 
 interface MotionExperienceProps {
   children: ReactNode;
@@ -87,12 +87,7 @@ export default function MotionExperience({ children }: MotionExperienceProps) {
   return (
     <div ref={rootRef} className="motion-experience">
       <div className="v2-scroll-progress" aria-hidden="true"><span className="v2-scroll-progress__bar" /></div>
-      <PagePreloader
-        background="bg-[var(--background)]"
-        duration={1250}
-        variant="words"
-        words={['read the field', 'build the system', 'activate the motion', 'compound the learning']}
-      />
+      <PortfolioLoader />
       <ReactLenis
         ref={lenisRef}
         root
