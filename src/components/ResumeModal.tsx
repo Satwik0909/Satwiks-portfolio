@@ -31,7 +31,9 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
     const previouslyFocused = document.activeElement as HTMLElement | null;
     const wasSeen = window.sessionStorage.getItem('satwik-resume-story-seen') === 'true';
-    setStorySkipped(wasSeen || Boolean(prefersReducedMotion));
+    const storyFrame = requestAnimationFrame(() => {
+      setStorySkipped(wasSeen || Boolean(prefersReducedMotion));
+    });
     window.sessionStorage.setItem('satwik-resume-story-seen', 'true');
     document.body.style.overflow = 'hidden';
     closeButtonRef.current?.focus();
@@ -57,6 +59,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => {
+      cancelAnimationFrame(storyFrame);
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
       previouslyFocused?.focus();
@@ -65,17 +68,21 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
   useEffect(() => {
     if (!isOpen) {
-      setPdfState('idle');
-      setPage(1);
-      setPageCount(0);
-      setZoom(1);
-      return;
+      const resetFrame = requestAnimationFrame(() => {
+        setPdfState('idle');
+        setPage(1);
+        setPageCount(0);
+        setZoom(1);
+      });
+      return () => cancelAnimationFrame(resetFrame);
     }
 
     let cancelled = false;
-    setPdfState('loading');
 
     const renderPage = async () => {
+      await Promise.resolve();
+      if (!cancelled) setPdfState('loading');
+
       try {
         const pdfjs = await import('pdfjs-dist');
         pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
