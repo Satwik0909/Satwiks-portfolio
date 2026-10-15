@@ -2303,7 +2303,7 @@
   }
 
   .v2-loader__wordmark {
-    font-size: clamp(4.4rem, 23vw, 8rem);
+    font-size: clamp(3.7rem, 20.5vw, 7rem);
     letter-spacing: -0.115em;
   }
 
