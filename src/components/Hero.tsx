@@ -64,10 +64,10 @@ export default function Hero({ onOpenResume }: HeroProps) {
               view resume <span className="button-arrow">&darr;</span>
             </MagneticButton>
             <Link href="#projects" className="button-secondary" data-cursor-text="View work">
-              see selected work <span className="button-arrow">&searr;</span>
+              see selected work <span className="button-arrow">&#8600;</span>
             </Link>
             <Link href="#contact" className="hero-contact-link" data-cursor-text="Say hello">
-              contact <span className="button-arrow">&nearr;</span>
+              contact <span className="button-arrow">&#8599;</span>
             </Link>
           </div>
 

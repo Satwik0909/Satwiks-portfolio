@@ -2256,6 +2256,16 @@ html {
   .resume-dialog--viewer .resume-dialog-title { font-size: 25px; }
 }
 
+.motion-root.motion-cursor-disabled {
+  cursor: auto !important;
+}
+
+.motion-root.motion-cursor-disabled a,
+.motion-root.motion-cursor-disabled button,
+.motion-root.motion-cursor-disabled [role='button'] {
+  cursor: pointer !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .system-scene__ring,
   .system-scene__connections path { animation: none; }
@@ -2343,6 +2353,12 @@ html {
   .github-card:hover {
     border-color: var(--line-strong);
     box-shadow: 0 20px 60px color-mix(in srgb, var(--accent) 9%, transparent);
+  }
+}
+
+@media (max-width: 1100px) {
+  .system-scene {
+    min-height: 0;
   }
 }
 

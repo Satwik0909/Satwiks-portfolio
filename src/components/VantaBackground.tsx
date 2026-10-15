@@ -16,7 +16,8 @@ export default function VantaBackground() {
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
-    if (!containerRef.current || prefersReducedMotion) return;
+    const canRender3D = window.matchMedia('(min-width: 721px)').matches;
+    if (!containerRef.current || prefersReducedMotion || !canRender3D) return;
 
     let cancelled = false;
 

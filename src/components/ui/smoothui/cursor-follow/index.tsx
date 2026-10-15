@@ -101,7 +101,7 @@ const CursorFollow: React.FC<CursorFollowProps> = ({
   return (
     // biome-ignore lint/a11y/noNoninteractiveElementInteractions: Interactive cursor tracking widget requires mouse events
     <div
-      className={`relative h-full w-full ${className}`}
+      className={`relative h-full w-full ${shouldReduceMotion ? "motion-cursor-disabled" : ""} ${className}`}
       onBlur={handleBlur}
       onFocus={handleFocus}
       onMouseLeave={() => {
