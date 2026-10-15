@@ -5,28 +5,24 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface PortfolioLoaderProps {
   onComplete?: () => void;
-  onReveal?: () => void;
 }
 
-const INTRO_DURATION_MS = 1550;
-const wordmark = 'SATWIK';
+const INTRO_DURATION_MS = 1750;
+const introLines = ['WELCOME TO', 'THE WORLD OF', 'SATWIK'];
 
-export default function PortfolioLoader({ onComplete, onReveal }: PortfolioLoaderProps) {
+export default function PortfolioLoader({ onComplete }: PortfolioLoaderProps) {
   const prefersReducedMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(true);
   const onCompleteRef = useRef(onComplete);
-  const onRevealRef = useRef(onReveal);
   const hasDismissedRef = useRef(false);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
-    onRevealRef.current = onReveal;
-  }, [onComplete, onReveal]);
+  }, [onComplete]);
 
   const dismiss = useCallback(() => {
     if (hasDismissedRef.current) return;
     hasDismissedRef.current = true;
-    onRevealRef.current?.();
     setIsVisible(false);
   }, []);
 
@@ -61,49 +57,52 @@ export default function PortfolioLoader({ onComplete, onReveal }: PortfolioLoade
           className="v2-loader"
           exit={prefersReducedMotion
             ? { opacity: 0 }
-            : {
-                clipPath: [
-                  'inset(0% 0% 0% 0% round 0px)',
-                  'inset(31% 8% 31% 8% round 999px)',
-                  'inset(50% 50% 50% 50% round 999px)',
-                ],
-                opacity: [1, 1, 0],
-              }}
+            : { y: '-100%' }}
           initial={false}
           onClick={dismiss}
-          style={{ clipPath: 'inset(0% 0% 0% 0% round 0px)' }}
           transition={prefersReducedMotion
             ? { duration: 0.08 }
-            : { duration: 0.9, ease: [0.76, 0, 0.24, 1], times: [0, 0.62, 1] }}
+            : { duration: 0.78, ease: [0.76, 0, 0.24, 1] }}
         >
-          {!prefersReducedMotion && (
+          <span className="v2-loader__copy" aria-hidden="true">
             <motion.span
-              className="v2-loader__signal"
-              initial={{ opacity: 0, scaleX: 0.08, scaleY: 0.32 }}
-              animate={{ opacity: [0, 1, 1, 0], scaleX: [0.08, 1, 1.04, 1.12], scaleY: [0.32, 1, 1, 0.82] }}
-              transition={{ delay: 0.18, duration: 1.3, ease: [0.22, 1, 0.36, 1], times: [0, 0.34, 0.78, 1] }}
-              aria-hidden="true"
-            />
-          )}
+              className="v2-loader__kicker"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.08, duration: 0.5 }}
+            >
+              Automation · Systems · Growth
+            </motion.span>
 
-          <motion.span
-            className="v2-loader__wordmark"
-            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.86, y: 28 }}
-            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: [0, 1, 1, 0], scale: [0.86, 1, 1.015, 1.035], y: [28, 0, 0, -8] }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.4, ease: [0.22, 1, 0.36, 1], times: [0, 0.24, 0.76, 1] }}
-            aria-hidden="true"
-          >
-            {wordmark.split('').map((letter, index) => (
+            <span className="v2-loader__headline">
+              {introLines.map((line, index) => (
+                <span className={`v2-loader__line${index === 2 ? ' is-accent' : ''}`} key={line}>
+                  <motion.span
+                    initial={prefersReducedMotion ? false : { y: '110%' }}
+                    animate={{ y: 0 }}
+                    transition={prefersReducedMotion
+                      ? { duration: 0 }
+                      : { delay: 0.12 + index * 0.16, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {line}
+                  </motion.span>
+                </span>
+              ))}
+            </span>
+
+            <motion.span
+              className="v2-loader__rule"
+              initial={prefersReducedMotion ? false : { scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.18, duration: 1.35, ease: [0.22, 1, 0.36, 1] }}
+            >
               <motion.span
-                key={`${letter}-${index}`}
-                initial={prefersReducedMotion ? false : { scaleY: 0.08, y: '32%' }}
-                animate={{ scaleY: 1, y: 0 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.06 + index * 0.045, duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </motion.span>
+                initial={prefersReducedMotion ? false : { x: '-100%' }}
+                animate={{ x: '100%' }}
+                transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.2, duration: 1.15, ease: 'easeInOut' }}
+              />
+            </motion.span>
+          </span>
 
           <span className="sr-only" role="status">Loading portfolio</span>
         </motion.button>

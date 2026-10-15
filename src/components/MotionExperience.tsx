@@ -2,10 +2,9 @@
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion, useReducedMotion } from 'framer-motion';
 import type { LenisRef } from 'lenis/react';
 import { ReactLenis } from 'lenis/react';
-import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useRef } from 'react';
 import CursorFollow from '@/components/ui/smoothui/cursor-follow';
 import PortfolioLoader from '@/components/redesign/PortfolioLoader';
 
@@ -14,11 +13,8 @@ interface MotionExperienceProps {
 }
 
 export default function MotionExperience({ children }: MotionExperienceProps) {
-  const prefersReducedMotion = useReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<LenisRef>(null);
-  const [isSiteRevealed, setIsSiteRevealed] = useState(false);
-  const revealSite = useCallback(() => setIsSiteRevealed(true), []);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -91,7 +87,7 @@ export default function MotionExperience({ children }: MotionExperienceProps) {
   return (
     <div ref={rootRef} className="motion-experience">
       <div className="v2-scroll-progress" aria-hidden="true"><span className="v2-scroll-progress__bar" /></div>
-      <PortfolioLoader onReveal={revealSite} />
+      <PortfolioLoader />
       <ReactLenis
         ref={lenisRef}
         root
@@ -102,18 +98,7 @@ export default function MotionExperience({ children }: MotionExperienceProps) {
           smoothWheel: true,
         }}
       >
-        <motion.div
-          className="motion-site"
-          initial={false}
-          animate={isSiteRevealed
-            ? { opacity: 1, scale: 1, y: 0 }
-            : { opacity: 0.42, scale: 1.018, y: 16 }}
-          transition={prefersReducedMotion
-            ? { duration: 0.08 }
-            : { duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <CursorFollow className="motion-root">{children}</CursorFollow>
-        </motion.div>
+        <CursorFollow className="motion-root">{children}</CursorFollow>
       </ReactLenis>
     </div>
   );
