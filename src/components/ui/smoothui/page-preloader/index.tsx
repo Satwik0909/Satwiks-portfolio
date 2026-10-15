@@ -310,12 +310,16 @@ const PagePreloader = ({
   // Sync stage with the active flag: entering re-arms the hold, and a
   // controlled dismissal while holding starts the exit.
   useEffect(() => {
-    if (active) {
-      setStage((current) => (current === "exiting" ? current : "hold"));
-      setWordIndex(0);
-      return;
-    }
-    setStage((current) => (current === "hold" ? "exiting" : current));
+    const frame = requestAnimationFrame(() => {
+      if (active) {
+        setStage((current) => (current === "exiting" ? current : "hold"));
+        setWordIndex(0);
+        return;
+      }
+      setStage((current) => (current === "hold" ? "exiting" : current));
+    });
+
+    return () => cancelAnimationFrame(frame);
   }, [active]);
 
   // Uncontrolled auto-hold: exit on its own after `duration`.

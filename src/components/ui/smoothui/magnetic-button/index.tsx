@@ -2,10 +2,11 @@
 
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
+import { useHoverCapable } from "@/hooks/useHoverCapable";
 import { cva, type VariantProps } from "class-variance-authority";
 import { motion, useReducedMotion, useSpring } from "motion/react";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 
 const magneticButtonVariants = cva(
   "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -60,7 +61,7 @@ const MagneticButton = ({
   ...props
 }: MagneticButtonProps) => {
   const shouldReduceMotion = useReducedMotion();
-  const [isHoverDevice, setIsHoverDevice] = useState(false);
+  const isHoverDevice = useHoverCapable();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -72,18 +73,6 @@ const MagneticButton = ({
     bounce: springConfig.bounce ?? 0.1,
     duration: springConfig.duration ?? 0.4,
   });
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    setIsHoverDevice(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsHoverDevice(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
 
   const isEffectDisabled = disabled || shouldReduceMotion || !isHoverDevice;
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useHoverCapable } from "@/hooks/useHoverCapable";
 import {
   motion,
   useMotionTemplate,
@@ -13,7 +14,6 @@ import {
   type PointerEvent as ReactPointerEvent,
   useEffect,
   useRef,
-  useState,
 } from "react";
 
 const DEFAULT_MAX_TILT = 12;
@@ -37,24 +37,6 @@ export interface TiltCardProps {
   perspective?: number;
   scale?: number;
 }
-
-const useHoverCapable = () => {
-  const [isHoverCapable, setIsHoverCapable] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    setIsHoverCapable(mediaQuery.matches);
-
-    const handleChange = (event: MediaQueryListEvent) => {
-      setIsHoverCapable(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  return isHoverCapable;
-};
 
 const applyParallax = (
   container: HTMLElement,

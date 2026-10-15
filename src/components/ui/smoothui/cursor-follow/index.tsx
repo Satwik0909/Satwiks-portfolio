@@ -8,6 +8,7 @@ import {
 } from "motion/react";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { useHoverCapable } from "@/hooks/useHoverCapable";
 
 import { useCursorPosition } from "./use-cursor-position";
 
@@ -29,19 +30,10 @@ const CursorFollow: React.FC<CursorFollowProps> = ({
   const [cursorText, setCursorText] = useState<string | null>(null);
   const [pendingText, setPendingText] = useState<string | null>(null);
   const [textWidth, setTextWidth] = useState<number>(0);
-  const [isHoverDevice, setIsHoverDevice] = useState(false);
+  const isHoverDevice = useHoverCapable();
   const [isVisible, setIsVisible] = useState(false);
   const measureRef = useRef<HTMLSpanElement>(null);
   const shouldReduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const updateCapability = () => setIsHoverDevice(mediaQuery.matches);
-
-    updateCapability();
-    mediaQuery.addEventListener("change", updateCapability);
-    return () => mediaQuery.removeEventListener("change", updateCapability);
-  }, []);
 
   // Motion values for smooth follow
   const x = useMotionValue(0);
