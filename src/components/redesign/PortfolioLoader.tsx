@@ -7,7 +7,8 @@ interface PortfolioLoaderProps {
   onComplete?: () => void;
 }
 
-const HOLD_DURATION_MS = 1050;
+const INTRO_DURATION_MS = 2550;
+const wordmark = 'SATWIK';
 
 export default function PortfolioLoader({ onComplete }: PortfolioLoaderProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -21,7 +22,7 @@ export default function PortfolioLoader({ onComplete }: PortfolioLoaderProps) {
   const dismiss = useCallback(() => setIsVisible(false), []);
 
   useEffect(() => {
-    const timer = window.setTimeout(dismiss, prefersReducedMotion ? 80 : HOLD_DURATION_MS);
+    const timer = window.setTimeout(dismiss, prefersReducedMotion ? 80 : INTRO_DURATION_MS);
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') dismiss();
     };
@@ -45,47 +46,54 @@ export default function PortfolioLoader({ onComplete }: PortfolioLoaderProps) {
   return (
     <AnimatePresence onExitComplete={() => onCompleteRef.current?.()}>
       {isVisible && (
-        <motion.div
+        <motion.button
+          type="button"
+          aria-label="Skip intro animation"
           className="v2-loader"
-          exit={prefersReducedMotion ? { opacity: 0 } : { y: '-100%' }}
+          exit={{ opacity: 0 }}
           initial={false}
-          role="status"
-          transition={prefersReducedMotion ? { duration: 0.08 } : { duration: 0.48, ease: [0.76, 0, 0.24, 1] }}
+          onClick={dismiss}
+          transition={prefersReducedMotion ? { duration: 0.08 } : { duration: 0.24, ease: 'easeOut' }}
         >
-          <div className="v2-loader__grid" aria-hidden="true" />
-          <div className="v2-loader__topline" aria-hidden="true">
-            <span>SK / PORTFOLIO</span>
-            <span>system boot · 01</span>
-          </div>
+          <motion.span
+            className="v2-loader__wordmark"
+            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.86, y: 28 }}
+            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: [0, 1, 1, 0], scale: [0.86, 1, 1.04, 1.08], y: [28, 0, 0, -10] }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.35, ease: [0.22, 1, 0.36, 1], times: [0, 0.28, 0.72, 1] }}
+            aria-hidden="true"
+          >
+            {wordmark.split('').map((letter, index) => (
+              <motion.span
+                key={`${letter}-${index}`}
+                initial={prefersReducedMotion ? false : { scaleY: 0.08, y: '32%' }}
+                animate={{ scaleY: 1, y: 0 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.06 + index * 0.045, duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </motion.span>
 
-          <div className="v2-loader__center">
-            <motion.div
-              className="v2-loader__mark"
-              animate={prefersReducedMotion ? undefined : { opacity: [0.65, 1], scale: [0.96, 1] }}
-              transition={{ duration: 0.55, ease: 'easeOut' }}
-              aria-hidden="true"
-            >
-              SK
-            </motion.div>
-            <div>
-              <span className="v2-loader__label">Initializing field-to-growth system</span>
-              <strong>Turning signal into shipped systems.</strong>
-            </div>
-          </div>
+          <motion.span
+            className="v2-loader__wipe"
+            initial={prefersReducedMotion ? { scale: 1, borderRadius: 0 } : { scale: 0.015, borderRadius: '50%' }}
+            animate={{ scale: 1, borderRadius: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 1.02, duration: 0.82, ease: [0.76, 0, 0.24, 1] }}
+            aria-hidden="true"
+          />
 
-          <div className="v2-loader__progress" aria-hidden="true">
+          {!prefersReducedMotion && (
             <motion.span
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={prefersReducedMotion ? { duration: 0.08 } : { duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+              className="v2-loader__aperture"
+              initial={{ opacity: 0, scaleX: 0.08, scaleY: 0.18 }}
+              animate={{ opacity: [0, 1, 1, 0], scaleX: [0.08, 1, 1, 0.02], scaleY: [0.18, 1, 1, 0.02] }}
+              transition={{ delay: 1.28, duration: 1.08, ease: [0.76, 0, 0.24, 1], times: [0, 0.34, 0.66, 1] }}
+              aria-hidden="true"
             />
-          </div>
+          )}
 
-          <button className="v2-loader__skip" type="button" onClick={dismiss}>
-            Skip intro
-          </button>
-          <span className="sr-only">Loading portfolio</span>
-        </motion.div>
+          <span className="sr-only" role="status">Loading portfolio</span>
+        </motion.button>
       )}
     </AnimatePresence>
   );
