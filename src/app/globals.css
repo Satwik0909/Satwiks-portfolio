@@ -2276,3 +2276,94 @@ html {
 .hero-title {
   text-wrap: balance;
 }
+
+/* Motion experience */
+.motion-experience,
+.motion-root {
+  min-height: 100%;
+}
+
+.hero {
+  min-height: min(900px, 100dvh);
+  isolation: isolate;
+}
+
+.hero-vanta {
+  position: absolute;
+  z-index: -2;
+  inset: -12% -6%;
+  overflow: hidden;
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+.vanta-background,
+.vanta-background canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-tilt {
+  border-radius: 10px;
+}
+
+.hero-tilt [data-tilt-depth] {
+  transition: transform 180ms ease-out;
+}
+
+.button-primary,
+.button-secondary,
+.hero-contact-link,
+.nav-cta,
+.nav-resume,
+.mobile-menu-button {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.button-primary:active,
+.button-secondary:active,
+.nav-cta:active,
+.nav-resume:active,
+.mobile-menu-button:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .motion-root,
+  .motion-root a,
+  .motion-root button,
+  .motion-root [role='button'] {
+    cursor: none !important;
+  }
+
+  .work-card:hover,
+  .experience-entry:hover,
+  .skill-node:hover,
+  .github-card:hover {
+    border-color: var(--line-strong);
+    box-shadow: 0 20px 60px color-mix(in srgb, var(--accent) 9%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-vanta {
+    display: none;
+  }
+
+  .hero-tilt [data-tilt-depth] {
+    transform: none !important;
+    transition: none;
+  }
+
+  .motion-root,
+  .motion-root a,
+  .motion-root button,
+  .motion-root [role='button'] {
+    cursor: auto !important;
+  }
+}

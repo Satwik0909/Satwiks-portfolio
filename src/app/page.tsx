@@ -11,12 +11,13 @@ import Process from '@/components/Process';
 import Projects from '@/components/Projects';
 import ResumeModal from '@/components/ResumeModal';
 import SkillMap from '@/components/SkillMap';
+import MotionExperience from '@/components/MotionExperience';
 
 export default function Home() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <>
+    <MotionExperience>
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
       <main>
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
@@ -29,6 +30,6 @@ export default function Home() {
         <Contact />
       </main>
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
-    </>
+    </MotionExperience>
   );
 }
