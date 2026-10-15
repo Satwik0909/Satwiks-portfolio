@@ -2316,6 +2316,10 @@
     font-size: 4rem;
   }
 
+  .v2-contact__marquee > div {
+    animation-duration: 32s;
+  }
+
   .v2-contact__layout {
     padding-top: 90px;
     padding-bottom: 76px;
@@ -2407,7 +2411,6 @@
 
 @media (hover: none), (pointer: coarse) {
   .v2-hero__ticker > div,
-  .v2-contact__marquee > div,
   .v2-journey__plane--mid::before,
   .v2-radar-sweep,
   .v2-case-diagram__pulse,
