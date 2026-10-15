@@ -5,21 +5,30 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface PortfolioLoaderProps {
   onComplete?: () => void;
+  onReveal?: () => void;
 }
 
-const INTRO_DURATION_MS = 2550;
+const INTRO_DURATION_MS = 1550;
 const wordmark = 'SATWIK';
 
-export default function PortfolioLoader({ onComplete }: PortfolioLoaderProps) {
+export default function PortfolioLoader({ onComplete, onReveal }: PortfolioLoaderProps) {
   const prefersReducedMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(true);
   const onCompleteRef = useRef(onComplete);
+  const onRevealRef = useRef(onReveal);
+  const hasDismissedRef = useRef(false);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
-  }, [onComplete]);
+    onRevealRef.current = onReveal;
+  }, [onComplete, onReveal]);
 
-  const dismiss = useCallback(() => setIsVisible(false), []);
+  const dismiss = useCallback(() => {
+    if (hasDismissedRef.current) return;
+    hasDismissedRef.current = true;
+    onRevealRef.current?.();
+    setIsVisible(false);
+  }, []);
 
   useEffect(() => {
     const timer = window.setTimeout(dismiss, prefersReducedMotion ? 80 : INTRO_DURATION_MS);
@@ -50,16 +59,38 @@ export default function PortfolioLoader({ onComplete }: PortfolioLoaderProps) {
           type="button"
           aria-label="Skip intro animation"
           className="v2-loader"
-          exit={{ opacity: 0 }}
+          exit={prefersReducedMotion
+            ? { opacity: 0 }
+            : {
+                clipPath: [
+                  'inset(0% 0% 0% 0% round 0px)',
+                  'inset(31% 8% 31% 8% round 999px)',
+                  'inset(50% 50% 50% 50% round 999px)',
+                ],
+                opacity: [1, 1, 0],
+              }}
           initial={false}
           onClick={dismiss}
-          transition={prefersReducedMotion ? { duration: 0.08 } : { duration: 0.24, ease: 'easeOut' }}
+          style={{ clipPath: 'inset(0% 0% 0% 0% round 0px)' }}
+          transition={prefersReducedMotion
+            ? { duration: 0.08 }
+            : { duration: 0.9, ease: [0.76, 0, 0.24, 1], times: [0, 0.62, 1] }}
         >
+          {!prefersReducedMotion && (
+            <motion.span
+              className="v2-loader__signal"
+              initial={{ opacity: 0, scaleX: 0.08, scaleY: 0.32 }}
+              animate={{ opacity: [0, 1, 1, 0], scaleX: [0.08, 1, 1.04, 1.12], scaleY: [0.32, 1, 1, 0.82] }}
+              transition={{ delay: 0.18, duration: 1.3, ease: [0.22, 1, 0.36, 1], times: [0, 0.34, 0.78, 1] }}
+              aria-hidden="true"
+            />
+          )}
+
           <motion.span
             className="v2-loader__wordmark"
             initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.86, y: 28 }}
-            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: [0, 1, 1, 0], scale: [0.86, 1, 1.04, 1.08], y: [28, 0, 0, -10] }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.35, ease: [0.22, 1, 0.36, 1], times: [0, 0.28, 0.72, 1] }}
+            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: [0, 1, 1, 0], scale: [0.86, 1, 1.015, 1.035], y: [28, 0, 0, -8] }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.4, ease: [0.22, 1, 0.36, 1], times: [0, 0.24, 0.76, 1] }}
             aria-hidden="true"
           >
             {wordmark.split('').map((letter, index) => (
@@ -73,24 +104,6 @@ export default function PortfolioLoader({ onComplete }: PortfolioLoaderProps) {
               </motion.span>
             ))}
           </motion.span>
-
-          <motion.span
-            className="v2-loader__wipe"
-            initial={prefersReducedMotion ? { scale: 1, borderRadius: 0 } : { scale: 0.015, borderRadius: '50%' }}
-            animate={{ scale: 1, borderRadius: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { delay: 1.02, duration: 0.82, ease: [0.76, 0, 0.24, 1] }}
-            aria-hidden="true"
-          />
-
-          {!prefersReducedMotion && (
-            <motion.span
-              className="v2-loader__aperture"
-              initial={{ opacity: 0, scaleX: 0.08, scaleY: 0.18 }}
-              animate={{ opacity: [0, 1, 1, 0], scaleX: [0.08, 1, 1, 0.02], scaleY: [0.18, 1, 1, 0.02] }}
-              transition={{ delay: 1.28, duration: 1.08, ease: [0.76, 0, 0.24, 1], times: [0, 0.34, 0.66, 1] }}
-              aria-hidden="true"
-            />
-          )}
 
           <span className="sr-only" role="status">Loading portfolio</span>
         </motion.button>

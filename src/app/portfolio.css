@@ -28,18 +28,34 @@
   overflow: hidden;
   padding: 0;
   border: 0;
-  background: #f5f5f2;
-  color: #050505;
+  background:
+    radial-gradient(circle at 72% 38%, color-mix(in srgb, var(--v2-cyan) 13%, transparent), transparent 34%),
+    radial-gradient(circle at 24% 72%, color-mix(in srgb, var(--v2-lime) 8%, transparent), transparent 30%),
+    var(--v2-bg);
+  color: var(--v2-text);
   cursor: default;
+  will-change: clip-path;
+}
+
+.v2-loader::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--v2-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--v2-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  content: '';
+  mask-image: radial-gradient(circle at center, black, transparent 76%);
+  opacity: 0.2;
 }
 
 .v2-loader__wordmark {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #050505;
+  color: var(--v2-text);
   font-family: var(--font-geist-sans), Arial, sans-serif;
   font-size: clamp(6rem, 21vw, 20rem);
   font-weight: 780;
@@ -53,23 +69,31 @@
   transform-origin: center bottom;
 }
 
-.v2-loader__wipe {
-  position: absolute;
-  z-index: 2;
-  display: block;
-  width: 150vmax;
-  height: 150vmax;
-  background: var(--v2-bg);
+.v2-loader__wordmark > span:nth-child(n + 4) {
+  color: var(--v2-lime);
+  text-shadow: 0 0 42px color-mix(in srgb, var(--v2-lime) 18%, transparent);
 }
 
-.v2-loader__aperture {
+.v2-loader__signal {
   position: absolute;
-  z-index: 3;
+  z-index: 1;
   display: block;
-  width: min(68vw, 980px);
-  height: min(58vh, 560px);
+  width: min(84vw, 1220px);
+  height: min(44vh, 430px);
+  border: 1px solid color-mix(in srgb, var(--v2-lime) 46%, transparent);
   border-radius: 999px;
-  background: #f5f5f2;
+  background:
+    radial-gradient(circle at 68% 42%, color-mix(in srgb, var(--v2-cyan) 12%, transparent), transparent 44%),
+    color-mix(in srgb, var(--v2-surface) 76%, transparent);
+  box-shadow:
+    inset 0 0 80px color-mix(in srgb, var(--v2-cyan) 6%, transparent),
+    0 0 80px color-mix(in srgb, var(--v2-lime) 5%, transparent);
+}
+
+.motion-site {
+  min-height: 100%;
+  transform-origin: center top;
+  will-change: opacity, transform;
 }
 
 .portfolio-v2 {
@@ -2307,9 +2331,9 @@
     letter-spacing: -0.115em;
   }
 
-  .v2-loader__aperture {
-    width: 82vw;
-    height: 44vh;
+  .v2-loader__signal {
+    width: 88vw;
+    height: 30vh;
   }
 }
 
