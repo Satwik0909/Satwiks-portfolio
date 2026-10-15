@@ -1,0 +1,211 @@
+export const navigation = [
+  { label: 'Journey', href: '#journey' },
+  { label: 'Systems', href: '#systems' },
+  { label: 'Work', href: '#work' },
+  { label: 'Capabilities', href: '#capabilities' },
+];
+
+export const journeyChapters = [
+  {
+    index: '01',
+    period: '2024',
+    title: 'I started at the interface.',
+    role: 'Full-stack Intern · LetzStepIn',
+    copy: 'Responsive React interfaces for a VR learning platform taught me the first field lesson: a system only matters when people can understand and use it.',
+    proof: ['15+ accessibility issues resolved', '35% fewer repeated UI components', 'Prototype cycles under two hours'],
+    mode: 'interface',
+  },
+  {
+    index: '02',
+    period: '2025',
+    title: 'Then I moved through the stack.',
+    role: 'Full-stack Engineer · Ironhawks',
+    copy: 'I built APIs, reusable service adapters, authentication, and production React experiences—learning to connect performance, security, and delivery speed.',
+    proof: ['~25% faster API response time', '90+ Lighthouse scores', '~30% faster onboarding'],
+    mode: 'stack',
+  },
+  {
+    index: '03',
+    period: '2025—26',
+    title: 'The work became operational.',
+    role: 'Backend Engineer · Sajre Edutech',
+    copy: 'Multi-tenant SaaS, payments, certificates, WhatsApp, referrals, CI/CD, and uptime pulled engineering directly into the daily reality of schools and event teams.',
+    proof: ['30+ production REST APIs', '99%+ uptime', '60% fewer manual QA cycles'],
+    mode: 'operations',
+  },
+  {
+    index: '04',
+    period: 'Now',
+    title: 'Now I engineer the whole loop.',
+    role: 'Forward-Deployed × GTM Engineer',
+    copy: 'My focus is the space between customer need and company growth: discover the bottleneck, ship the system, activate the workflow, and feed what the field teaches back into product.',
+    proof: ['Customer discovery', 'Production delivery', 'Revenue automation'],
+    mode: 'field',
+  },
+] as const;
+
+export const operatingLoop = [
+  {
+    index: '01',
+    verb: 'Observe',
+    title: 'Find the real bottleneck',
+    copy: 'Shadow the workflow, map the handoffs, and define the outcome before choosing a tool.',
+    signal: 'customer + operator context',
+  },
+  {
+    index: '02',
+    verb: 'Architect',
+    title: 'Design the smallest durable system',
+    copy: 'Model the data, permissions, integrations, failure paths, and launch criteria together.',
+    signal: 'scope + success metric',
+  },
+  {
+    index: '03',
+    verb: 'Deploy',
+    title: 'Put it inside the real workflow',
+    copy: 'Ship production code, connect existing systems, and make ownership clear after go-live.',
+    signal: 'adoption + reliability',
+  },
+  {
+    index: '04',
+    verb: 'Activate',
+    title: 'Turn signals into action',
+    copy: 'Route the right account, message, task, or insight to the right person at the right moment.',
+    signal: 'pipeline + cycle time',
+  },
+  {
+    index: '05',
+    verb: 'Compound',
+    title: 'Make the next deployment faster',
+    copy: 'Measure the outcome, capture field feedback, and convert repeated work into reusable patterns.',
+    signal: 'playbook + product feedback',
+  },
+] as const;
+
+export const caseStudies = [
+  {
+    index: '01',
+    eyebrow: 'Production SaaS · Verified',
+    title: 'School operations, one tenant at a time.',
+    name: 'EduSoft / School ERP',
+    description: 'A schema-per-tenant backend for institution workflows with role boundaries, operational APIs, certificates, payments, and communication paths.',
+    outcome: '30+ APIs · 99%+ uptime · 60% fewer manual QA cycles',
+    tags: ['Django', 'DRF', 'PostgreSQL', 'RBAC', 'Razorpay', 'CI/CD'],
+    flow: ['Institution', 'Tenant API', 'Workflow', 'Outcome'],
+    tone: 'lime',
+    href: 'https://sajreedutech.com/edusoft',
+    linkLabel: 'View live product',
+  },
+  {
+    index: '02',
+    eyebrow: 'Live platform · Verified',
+    title: 'A national art competition as an operating system.',
+    name: "Sajre's NAS",
+    description: 'Multi-role workflows spanning enrollment, fees, artwork submission, validation, judging, voting, certificates, notifications, and referrals.',
+    outcome: 'Live deployment · Multi-role delivery · Production ownership',
+    tags: ['Django', 'REST APIs', 'JWT', 'WhatsApp', 'Automation', 'VPS'],
+    flow: ['Student', 'Submission', 'Review', 'Certificate'],
+    tone: 'cyan',
+    href: 'https://sajrenas.com/',
+    linkLabel: 'Visit live platform',
+  },
+  {
+    index: '03',
+    eyebrow: 'Personal system · Verified',
+    title: 'Retention signals before memberships lapse.',
+    name: 'Membership Lifecycle Engine',
+    description: 'A MERN system for subscription state, attendance, billing, revenue analytics, and automated WhatsApp or email reminders before expiry.',
+    outcome: '35% faster analytics queries · Atomic lifecycle changes',
+    tags: ['Node.js', 'MongoDB', 'React', 'JWT', 'Aggregation', 'Messaging'],
+    flow: ['Usage', 'Expiry signal', 'Reminder', 'Renewal'],
+    tone: 'violet',
+    href: 'https://github.com/Satwik0909',
+    linkLabel: 'Explore public work',
+  },
+  {
+    index: '04',
+    eyebrow: 'Representative GTM blueprint',
+    title: 'From scattered intent to one accountable next action.',
+    name: 'Revenue Signal Router',
+    description: 'A transparent automation pattern for collecting product, form, payment, and conversation signals; enriching the record; scoring intent; and routing the next action with an audit trail.',
+    outcome: 'Illustrative architecture · No client or outcome claim',
+    tags: ['CRM', 'Webhooks', 'Enrichment', 'Lead routing', 'n8n', 'Analytics'],
+    flow: ['Signal', 'Enrich', 'Score', 'Route'],
+    tone: 'orange',
+    href: '#contact',
+    linkLabel: 'Build a version for your team',
+  },
+] as const;
+
+export const capabilityLayers = [
+  {
+    index: 'L1',
+    title: 'Customer + Revenue',
+    status: 'Applied',
+    copy: 'Discovery, workflow mapping, stakeholder translation, adoption, and outcome definition.',
+    skills: ['Client discovery', 'Requirements', 'GTM workflow design', 'Technical demos', 'Playbooks'],
+  },
+  {
+    index: 'L2',
+    title: 'Automation + Integration',
+    status: 'Shipped',
+    copy: 'APIs and event-driven workflows that connect communication, payments, product, and operations.',
+    skills: ['REST APIs', 'Webhooks', 'WhatsApp API', 'Razorpay', 'OpenAPI', 'Workflow automation'],
+  },
+  {
+    index: 'L3',
+    title: 'Product + Data',
+    status: 'Shipped',
+    copy: 'Multi-role SaaS foundations, interfaces, permission models, analytics, and data boundaries.',
+    skills: ['Python', 'Django / DRF', 'Node.js', 'React / Next.js', 'PostgreSQL', 'MongoDB'],
+  },
+  {
+    index: 'L4',
+    title: 'Reliability + Delivery',
+    status: 'Shipped',
+    copy: 'The operating layer that keeps a useful prototype from becoming a fragile production burden.',
+    skills: ['RBAC', 'API security', 'GitHub Actions', 'Nginx', 'VPS', 'Testing + runbooks'],
+  },
+] as const;
+
+export const frontierSkills = [
+  'CRM architecture',
+  'Intent + product signals',
+  'Clay / enrichment patterns',
+  'n8n orchestration',
+  'LLM evals + guardrails',
+  'Agents + MCP',
+  'Lifecycle analytics',
+  'Experiment design',
+] as const;
+
+export const experience = [
+  {
+    period: 'Now',
+    company: 'Subhx Infotech',
+    role: 'Full Stack Engineer',
+    summary: 'Contributing across frontend and backend delivery while continuing to move closer to customer workflows and full-cycle ownership.',
+    stack: ['Full stack', 'React', 'Node.js', 'REST APIs'],
+  },
+  {
+    period: 'Sep 2025 — Mar 2026',
+    company: 'Sajre Edutech Pvt. Ltd.',
+    role: 'Software Engineer · Backend',
+    summary: 'Built multi-tenant SaaS systems, APIs, RBAC, payments, certificates, WhatsApp workflows, CI/CD, and production operations for education products.',
+    stack: ['Django', 'DRF', 'PostgreSQL', 'Razorpay', 'WhatsApp', 'CI/CD'],
+  },
+  {
+    period: 'Apr 2025 — Aug 2025',
+    company: 'Ironhawks Technologies',
+    role: 'Software Engineer · Full Stack',
+    summary: 'Shipped secure APIs and React applications, tuned MongoDB queries, documented integrations, and improved frontend performance.',
+    stack: ['Node.js', 'Express', 'React', 'MongoDB', 'JWT', 'OpenAPI'],
+  },
+  {
+    period: 'Nov 2024 — Mar 2025',
+    company: 'LetzStepIn Pvt. Ltd.',
+    role: 'Software Engineer · Full Stack',
+    summary: 'Built responsive interfaces for a VR learning platform and improved reuse, accessibility, cross-browser quality, and review workflows.',
+    stack: ['React', 'JavaScript', 'Bootstrap', 'Accessibility', 'Git'],
+  },
+] as const;

@@ -28,17 +28,17 @@ export default function VantaBackground() {
       const isDark = resolvedTheme !== 'light';
       effectRef.current = createFog({
         THREE,
-        baseColor: isDark ? 0x0d0c0a : 0xf5f4ef,
-        blurFactor: 0.72,
+        baseColor: isDark ? 0x05070c : 0xf2f0e8,
+        blurFactor: 0.78,
         el: containerRef.current,
         gyroControls: false,
-        highlightColor: isDark ? 0x86c77a : 0x9bcf9b,
-        lowlightColor: isDark ? 0x172018 : 0xdfeade,
-        midtoneColor: isDark ? 0x2f4a33 : 0xc8dbc8,
+        highlightColor: isDark ? 0xb7ff52 : 0xc0dd78,
+        lowlightColor: isDark ? 0x091a27 : 0xdbe8e8,
+        midtoneColor: isDark ? 0x183a4c : 0xbacfd5,
         mouseControls: true,
-        speed: 0.55,
+        speed: 0.5,
         touchControls: false,
-        zoom: 1.25,
+        zoom: 1.18,
       });
     };
 

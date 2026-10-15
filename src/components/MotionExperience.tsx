@@ -30,20 +30,20 @@ export default function MotionExperience({ children }: MotionExperienceProps) {
     lenis?.on('scroll', syncScrollTrigger);
 
     const context = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>('main > section:not(#home)').forEach((section) => {
-        const content = section.querySelector<HTMLElement>(':scope > .container') ?? section;
+      gsap.utils.toArray<HTMLElement>('[data-section-reveal]').forEach((section) => {
+        const content = section.querySelector<HTMLElement>(':scope > .v2-container') ?? section;
 
         gsap.fromTo(
           content,
-          { autoAlpha: 0, y: 14 },
+          { autoAlpha: 0, y: 18 },
           {
             autoAlpha: 1,
-            duration: 0.4,
-            ease: 'power1.out',
+            duration: 0.65,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse',
+              start: 'top 92%',
+              toggleActions: 'play none none none',
             },
             y: 0,
           },
@@ -62,6 +62,17 @@ export default function MotionExperience({ children }: MotionExperienceProps) {
           yPercent: 8,
         });
       });
+
+      gsap.to('.v2-scroll-progress__bar', {
+        ease: 'none',
+        scaleX: 1,
+        scrollTrigger: {
+          end: 'max',
+          scrub: 0.2,
+          start: 0,
+        },
+        transformOrigin: 'left center',
+      });
     }, rootRef);
 
     ScrollTrigger.refresh();
@@ -75,11 +86,12 @@ export default function MotionExperience({ children }: MotionExperienceProps) {
 
   return (
     <div ref={rootRef} className="motion-experience">
+      <div className="v2-scroll-progress" aria-hidden="true"><span className="v2-scroll-progress__bar" /></div>
       <PagePreloader
         background="bg-[var(--background)]"
-        duration={950}
+        duration={1250}
         variant="words"
-        words={['mapping the gap', 'building the system', 'ready to ship']}
+        words={['read the field', 'build the system', 'activate the motion', 'compound the learning']}
       />
       <ReactLenis
         ref={lenisRef}
@@ -87,7 +99,7 @@ export default function MotionExperience({ children }: MotionExperienceProps) {
         options={{
           anchors: { offset: -72 },
           autoRaf: false,
-          duration: 1.05,
+          duration: 1.12,
           smoothWheel: true,
         }}
       >

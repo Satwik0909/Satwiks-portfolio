@@ -1,33 +1,31 @@
 'use client';
 
 import { useState } from 'react';
-import Contact from '@/components/Contact';
-import Experience from '@/components/Experience';
-import GitHubFeed from '@/components/GitHubFeed';
-import Hero from '@/components/Hero';
-import Navbar from '@/components/Navbar';
-import PortfolioDemo from '@/components/PortfolioDemo';
-import Process from '@/components/Process';
-import Projects from '@/components/Projects';
 import ResumeModal from '@/components/ResumeModal';
-import SkillMap from '@/components/SkillMap';
 import MotionExperience from '@/components/MotionExperience';
+import CapabilityStack from '@/components/redesign/CapabilityStack';
+import CareerTimeline from '@/components/redesign/CareerTimeline';
+import CaseStudies from '@/components/redesign/CaseStudies';
+import ContactStage from '@/components/redesign/ContactStage';
+import JourneyStory from '@/components/redesign/JourneyStory';
+import OperatingSystem from '@/components/redesign/OperatingSystem';
+import PortfolioHero from '@/components/redesign/PortfolioHero';
+import PortfolioNav from '@/components/redesign/PortfolioNav';
 
 export default function Home() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
     <MotionExperience>
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
-      <main>
-        <Hero onOpenResume={() => setIsResumeOpen(true)} />
-        <Process />
-        <Projects />
-        <Experience />
-        <SkillMap />
-        <PortfolioDemo />
-        <GitHubFeed />
-        <Contact />
+      <PortfolioNav onOpenResume={() => setIsResumeOpen(true)} />
+      <main className="portfolio-v2">
+        <PortfolioHero onOpenResume={() => setIsResumeOpen(true)} />
+        <JourneyStory />
+        <OperatingSystem />
+        <CaseStudies />
+        <CapabilityStack />
+        <CareerTimeline />
+        <ContactStage />
       </main>
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </MotionExperience>
